@@ -10,7 +10,7 @@ const instrumentName = process.argv[2];
 let msg;
 
 if (!instrumentName || !protocol.INSTRUMENTS.hasOwnProperty(instrumentName)) {
-    console.log('Instrument incorrect');
+    console.log('Instrument manquant ou incorrect');
     return;
 }
 
