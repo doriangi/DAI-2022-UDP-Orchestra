@@ -4,4 +4,4 @@ COPY src /opt/app
 
 WORKDIR /opt/app
 
-ENTRYPOINT [ "node", "app.js" ]
+ENTRYPOINT [ "node", "/opt/app/app.js" ]

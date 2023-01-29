@@ -22,7 +22,7 @@ const payload = JSON.stringify({
 msg = Buffer.from(payload);
 
 function update() {
-    socket.send(msg, 0, msg.length, 3000, protocol.MULTICAST_ADDRESS, () => {
+    socket.send(msg, 0, msg.length, protocol.MULTICAST_PORT, protocol.MULTICAST_ADDRESS, () => {
         console.log('Envoi du payload: ' + payload + ' avec le port ' + socket.address().port);
     });
 }
