@@ -24,9 +24,8 @@ socket.bind(MULTICAST_PORT, () => {
 
 socket.on('message', (msg, source) => {
     let data = JSON.parse(msg);
-    data.last = Date.now();
     data.instrument = sounds.get(data.sound);
-    data.activeSince = musicians.has(data.uuid) ? musicians.get(data.uuid).activeSince : data.last;
+    data.activeSince = Date.now();
 
     delete data.sound;
 
@@ -39,13 +38,13 @@ const server = net.createServer();
 
 server.on('connection', (socket) => {
     const actives = Array.from(musicians.entries()).filter(([uuid, musician]) => {
-        const active = Date.now() - musician.last <= INTERVAL;
+        const active = Date.now() - musician.activeSince <= INTERVAL;
         if (!active) musicians.delete(uuid);
         return active;
     }).map(([uuid, musician]) => ({
         uuid: uuid,
         instrument: musician.instrument,
-        activeSince: new Date(musician.activeSince)
+        activeSince: musician.activeSince
     }));
     socket.write(JSON.stringify(actives) + '\n');
     socket.end();
