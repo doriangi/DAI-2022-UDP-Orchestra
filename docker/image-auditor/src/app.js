@@ -7,7 +7,7 @@ const MULTICAST_ADDRESS = "231.2.23.2";
 const MULTICAST_PORT = 3000;
 const TCP_PORT = 2205;
 
-var sounds = new Map();
+let sounds = new Map();
 sounds.set("ti-ta-ti", "piano");
 sounds.set("pouet", "trumpet");
 sounds.set("trulu", "flute");
